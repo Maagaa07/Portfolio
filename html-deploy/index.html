@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Graphic Designer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c9a87c;
+            --gold-light: #d9bc9a;
+            --gold-dark: #b8996d;
+            --charcoal: #1a1a1a;
+            --charcoal-light: #4a4a4a;
+            --white: #ffffff;
+            --gray: #f5f5f5;
+            --border: #e0e0e0;
+            --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.5s var(--ease-expo-out);
+            padding: 20px 0;
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 12px 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--charcoal);
+            transition: letter-spacing 0.3s;
+        }
+
+        .logo:hover {
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--charcoal-light);
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: all 0.3s var(--ease-expo-out);
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover {
+            color: var(--charcoal);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 10px 24px;
+            border: 2px solid var(--charcoal);
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            background: transparent;
+            color: var(--charcoal);
+            transition: all 0.3s var(--ease-expo-out);
+        }
+
+        .nav-cta:hover {
+            background: var(--charcoal);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(26, 26, 26, 0.2);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            padding: 8px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(var(--charcoal) 1px, transparent 1px),
+                linear-gradient(90deg, var(--charcoal) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .hero-accent {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.1;
+            background: var(--gold);
+        }
+
+        .hero-accent-1 {
+            width: 300px;
+            height: 300px;
+            top: 20%;
+            right: 20%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-accent-2 {
+            width: 200px;
+            height: 200px;
+            bottom: 20%;
+            left: 10%;
+            animation: float 8s ease-in-out infinite 2s;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            color: var(--gold);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeUp 0.7s var(--ease-expo-out) 0.2s forwards;
+        }
+
+        .hero-title {
+            font-size: clamp(48px, 8vw, 72px);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--charcoal);
+            margin-bottom: 24px;
+        }
+
+        .hero-title span {
+            display: block;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease-expo-out) forwards;
+        }
+
+        .hero-title span:nth-child(1) { animation-delay: 0.3s; }
+        .hero-title span:nth-child(2) { animation-delay: 0.4s; }
+        .hero-title span:nth-child(3) { animation-delay: 0.5s; }
+
+        .hero-desc {
+            font-size: 18px;
+            color: var(--charcoal-light);
+            max-width: 500px;
+            margin-bottom: 32px;
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeUp 0.7s var(--ease-expo-out) 0.6s forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeUp 0.7s var(--ease-expo-out) 0.7s forwards;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s var(--ease-expo-out);
+        }
+
+        .btn-primary {
+            background: var(--charcoal);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(26, 26, 26, 0.3);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--charcoal);
+            background: transparent;
+            color: var(--charcoal);
+        }
+
+        .btn-outline:hover {
+            background: var(--charcoal);
+            color: var(--white);
+        }
+
+        .hero-social {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            opacity: 0;
+            animation: fadeUp 0.7s var(--ease-expo-out) 0.8s forwards;
+        }
+
+        .hero-social span {
+            font-size: 13px;
+            color: var(--charcoal-light);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s var(--ease-spring);
+            opacity: 0;
+            transform: scale(0);
+            animation: scaleIn 0.5s var(--ease-spring) forwards;
+        }
+
+        .social-link:nth-child(1) { animation-delay: 0.9s; }
+        .social-link:nth-child(2) { animation-delay: 0.98s; }
+        .social-link:nth-child(3) { animation-delay: 1.06s; }
+
+        .social-link:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--white);
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Hero Image */
+        .hero-image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeIn 1s var(--ease-expo-out) 0.4s forwards;
+        }
+
+        .hero-image-frame {
+            position: relative;
+        }
+
+        .frame-deco {
+            position: absolute;
+            inset: -16px;
+            border: 2px solid rgba(201, 168, 124, 0.3);
+            border-radius: 8px;
+            transform: rotate(3deg);
+            transition: transform 0.5s;
+        }
+
+        .frame-deco-2 {
+            position: absolute;
+            inset: -12px;
+            border: 2px solid rgba(26, 26, 26, 0.1);
+            border-radius: 8px;
+            transform: rotate(-2deg);
+            transition: transform 0.5s;
+        }
+
+        .hero-image-wrapper:hover .frame-deco {
+            transform: rotate(6deg);
+        }
+
+        .hero-image-wrapper:hover .frame-deco-2 {
+            transform: rotate(-4deg);
+        }
+
+        .hero-image {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            animation: breathe 8s ease-in-out infinite;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 450px;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+        }
+
+        .experience-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background: var(--white);
+            padding: 20px 24px;
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            opacity: 0;
+            animation: scaleIn 0.6s var(--ease-spring) 1s forwards;
+        }
+
+        .experience-badge .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--charcoal);
+        }
+
+        .experience-badge .text {
+            font-size: 13px;
+            color: var(--charcoal-light);
+        }
+
+        /* About Section */
+        .about {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image-deco {
+            position: absolute;
+            inset: -24px;
+            border: 1px solid rgba(201, 168, 124, 0.2);
+            border-radius: 8px;
+        }
+
+        .about-image-deco-2 {
+            position: absolute;
+            inset: -12px;
+            border: 1px solid rgba(26, 26, 26, 0.1);
+            border-radius: 8px;
+            transform: rotate(1deg);
+        }
+
+        .about-image-inner {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .about-image-inner img {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            transition: transform 0.6s var(--ease-expo-out);
+        }
+
+        .about-image:hover .about-image-inner img {
+            transform: scale(1.03);
+        }
+
+        .about-badge {
+            position: absolute;
+            bottom: -24px;
+            right: -24px;
+            background: var(--charcoal);
+            color: var(--white);
+            padding: 24px 28px;
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-badge .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+        }
+
+        .about-badge .text {
+            font-size: 13px;
+            opacity: 0.7;
+        }
+
+        .section-label {
+            color: var(--gold);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--charcoal);
+            margin-bottom: 24px;
+        }
+
+        .about-text {
+            color: var(--charcoal-light);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .about-cta {
+            margin-top: 32px;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--charcoal);
+        }
+
+        .stat-number span {
+            color: var(--gold);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--charcoal-light);
+            margin-top: 4px;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 120px 0;
+            background: var(--gray);
+        }
+
+        .projects-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+
+        .filter-btn {
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 500;
+            background: var(--white);
+            color: var(--charcoal-light);
+            border: 1px solid var(--border);
+            transition: all 0.3s var(--ease-expo-out);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--charcoal);
+            color: var(--white);
+            border-color: var(--charcoal);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--white);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s var(--ease-expo-out);
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-card.tall {
+            grid-row: span 2;
+        }
+
+        .project-card.featured {
+            grid-column: span 2;
+        }
+
+        .project-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:not(.tall):not(.featured) .project-image {
+            aspect-ratio: 4/3;
+        }
+
+        .project-card.tall .project-image {
+            aspect-ratio: 3/4;
+            height: 100%;
+        }
+
+        .project-card.featured .project-image {
+            aspect-ratio: 21/9;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--ease-expo-out);
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.08);
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.5s;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-category {
+            color: var(--gold);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .project-title {
+            color: var(--white);
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .project-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .project-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--white);
+            color: var(--charcoal);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .project-btn:hover {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        .project-tag {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--charcoal);
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover .project-tag {
+            opacity: 0;
+        }
+
+        .projects-footer {
+            text-align: center;
+            margin-top: 48px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: rgba(201, 168, 124, 0.05);
+            transform: skewX(-12deg);
+            transform-origin: top right;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--charcoal);
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: var(--white);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 168, 124, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--charcoal);
+            color: var(--white);
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s var(--ease-expo-out);
+        }
+
+        .form-submit:hover {
+            background: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(26, 26, 26, 0.25);
+        }
+
+        .contact-info {
+            padding-left: 40px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .info-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(201, 168, 124, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        .info-item:hover .info-icon {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        .info-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .info-label {
+            font-size: 13px;
+            color: var(--charcoal-light);
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--charcoal);
+            transition: color 0.3s;
+        }
+
+        .info-item:hover .info-value {
+            color: var(--gold);
+        }
+
+        .contact-social {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-social-title {
+            font-size: 13px;
+            color: var(--charcoal-light);
+            margin-bottom: 16px;
+        }
+
+        .contact-social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .contact-social-link {
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--charcoal);
+            transition: all 0.3s var(--ease-spring);
+        }
+
+        .contact-social-link:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        .contact-social-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 32px 0;
+            background: var(--gray);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--charcoal);
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-nav a {
+            font-size: 14px;
+            color: var(--charcoal-light);
+            transition: color 0.3s;
+        }
+
+        .footer-nav a:hover {
+            color: var(--charcoal);
+        }
+
+        .footer-copy {
+            font-size: 13px;
+            color: var(--charcoal-light);
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s var(--ease-expo-out);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 48px;
+                text-align: center;
+            }
+
+            .hero-desc {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-social {
+                justify-content: center;
+            }
+
+            .hero-image-wrapper {
+                order: -1;
+            }
+
+            .hero-image img {
+                max-width: 320px;
+            }
+
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .about-badge {
+                right: 20px;
+            }
+
+            .contact-info {
+                padding-left: 0;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .project-card.featured {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 42px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card.tall,
+            .project-card.featured {
+                grid-row: auto;
+                grid-column: auto;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+
+            .contact-bg {
+                display: none;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--white);
+            z-index: 999;
+            padding: 100px 24px 24px;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+        }
+
+        .mobile-menu-links li {
+            margin-bottom: 24px;
+        }
+
+        .mobile-menu-links a {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--charcoal);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            background: none;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">Portfolio</a>
+            <ul class="nav-links">
+                <li><a href="#home">Нүүр</a></li>
+                <li><a href="#about">Тухай</a></li>
+                <li><a href="#projects">Ажлууд</a></li>
+                <li><a href="#contact">Холбогдох</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">Холбогдох</a>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+        <ul class="mobile-menu-links">
+            <li><a href="#home" onclick="toggleMobileMenu()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                Нүүр
+            </a></li>
+            <li><a href="#about" onclick="toggleMobileMenu()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                Тухай
+            </a></li>
+            <li><a href="#projects" onclick="toggleMobileMenu()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+                Ажлууд
+            </a></li>
+            <li><a href="#contact" onclick="toggleMobileMenu()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+                Холбогдох
+            </a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg-pattern"></div>
+        <div class="hero-accent hero-accent-1"></div>
+        <div class="hero-accent hero-accent-2"></div>
+        
+        <div class="hero-container">
+            <div class="hero-content">
+                <p class="hero-label">График Дизайнер</p>
+                <h1 class="hero-title">
+                    <span>Бүтээх</span>
+                    <span>Дижитал</span>
+                    <span>Туршлага</span>
+                </h1>
+                <p class="hero-desc">
+                    Би бренд хөтлөлөө, вэб дизайн болон визуал өгүүллэгийн чиглэлээр 
+                    мэргэшсэн график дизайнер. Хамтдаа гайхамшигтай зүйл бүтээе.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        Ажлуудыг үзэх
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#contact" class="btn btn-outline">Холбогдох</a>
+                </div>
+                <div class="hero-social">
+                    <span>Дагах:</span>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Dribbble">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image-wrapper">
+                <div class="hero-image-frame">
+                    <div class="frame-deco"></div>
+                    <div class="frame-deco-2"></div>
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=800&fit=crop" alt="Portrait">
+                    </div>
+                    <div class="experience-badge">
+                        <div class="number">5+</div>
+                        <div class="text">Жилийн туршлага</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image reveal">
+                    <div class="about-image-deco"></div>
+                    <div class="about-image-deco-2"></div>
+                    <div class="about-image-inner">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&h=1000&fit=crop" alt="About">
+                    </div>
+                    <div class="about-badge">
+                        <div class="number">5+</div>
+                        <div class="text">Жилийн туршлага</div>
+                    </div>
+                </div>
+                
+                <div class="about-content">
+                    <p class="section-label reveal">Миний тухай</p>
+                    <h2 class="section-title reveal">Утга учиртай дизайн бүтээхэд чинээлэг</h2>
+                    <p class="about-text reveal">
+                        График дизайны чиглэлээр 5+ жилийн туршлагатай би стартапуудаас эхлээд 
+                        томоохон брэндүүд хүртэл олон төрлийн үйлчлүүлэгчидтэй хамтран ажилласан. 
+                        Миний хандлага нь стратегийн сэтгэлгээг бүтээлч гүйцэтгэлтэй хослуулж, 
+                        зөвхөн үзэсгэлэнтэй харагдахаас гадна бизнесийн зорилгодоо хүрдэг 
+                        дизайн бүтээхэд чиглэгддэг.
+                    </p>
+                    <p class="about-text reveal">
+                        Визуал өгүүллэгийн хүч чадал болон брэндүүдээ үзэгчидтэйгээ холбоход 
+                        үзүүлэх нөлөөнд би итгэдэг. Бүрэлдэхүүн хэсэг бүр нь өвөрмөц, мартагдашгүй 
+                        зүйл бүтээх боломж юм.
+                    </p>
+                    <div class="about-cta reveal">
+                        <a href="#" class="btn btn-outline">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            CV татах
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat reveal">
+                    <div class="stat-number">50<span>+</span></div>
+                    <div class="stat-label">Төслүүд</div>
+                </div>
+                <div class="stat reveal">
+                    <div class="stat-number">30<span>+</span></div>
+                    <div class="stat-label">Үйлчлүүлэгчид</div>
+                </div>
+                <div class="stat reveal">
+                    <div class="stat-number">5<span>+</span></div>
+                    <div class="stat-label">Жил туршлага</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="projects-header">
+                <p class="section-label reveal">Сонгосон ажлууд</p>
+                <h2 class="section-title reveal">Намайг тодорхойлдог төслүүд</h2>
+            </div>
+            
+            <div class="filter-buttons reveal">
+                <button class="filter-btn active" onclick="filterProjects('all')">Бүгд</button>
+                <button class="filter-btn" onclick="filterProjects('interior')">Интерьер</button>
+                <button class="filter-btn" onclick="filterProjects('mockup')">Mockup</button>
+                <button class="filter-btn" onclick="filterProjects('poster')">Poster</button>
+                <button class="filter-btn" onclick="filterProjects('menu')">Мэню</button>
+                <button class="filter-btn" onclick="filterProjects('photo')">Зураг авалт</button>
+            </div>
+            
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Interior Project -->
+                <div class="project-card tall" data-category="interior">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&h=1000&fit=crop" alt="Interior Design">
+                        <div class="project-overlay">
+                            <span class="project-category">Интерьер</span>
+                            <h3 class="project-title">Орчин үеийн интерьер</h3>
+                            <p class="project-desc">Минималист загварын орон сууцны интерьерийн зураг авалт</p>
+                            <span class="project-btn">
+                                Төслийг үзэх
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="project-tag">Интерьер</span>
+                </div>
+                
+                <!-- Mockup Project -->
+                <div class="project-card" data-category="mockup">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800&h=600&fit=crop" alt="Branding Mockup">
+                        <div class="project-overlay">
+                            <span class="project-category">Mockup</span>
+                            <h3 class="project-title">Бренд хөтлөлөө</h3>
+                            <p class="project-desc">Люкс брэндийн бүрэн хөтлөлөөний mockup</p>
+                            <span class="project-btn">
+                                Төслийг үзэх
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="project-tag">Mockup</span>
+                </div>
+                
+                <!-- Poster Project -->
+                <div class="project-card" data-category="poster">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop" alt="Poster Design">
+                        <div class="project-overlay">
+                            <span class="project-category">Poster</span>
+                            <h3 class="project-title">Уран постер</h3>
+                            <p class="project-desc">Үзэгсэлэнт постер дизайн</p>
+                            <span class="project-btn">
+                                Төслийг үзэх
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="project-tag">Poster</span>
+                </div>
+                
+                <!-- Menu Project -->
+                <div class="project-card" data-category="menu">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop" alt="Menu Design">
+                        <div class="project-overlay">
+                            <span class="project-category">Мэню</span>
+                            <h3 class="project-title">Ресторан мэню</h3>
+                            <p class="project-desc">Онцгой рестораны мэню дизайн</p>
+                            <span class="project-btn">
+                                Төслийг үзэх
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="project-tag">Мэню</span>
+                </div>
+                
+                <!-- Photography Project (Featured) -->
+                <div class="project-card featured" data-category="photo">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?w=1200&h=600&fit=crop" alt="Photography">
+                        <div class="project-overlay">
+                            <span class="project-category">Зураг авалт</span>
+                            <h3 class="project-title">Мэргэжлийн зураг авалт</h3>
+                            <p class="project-desc">Бүтээгдэхүүн болон портрет зураг авалтын цуглуулга</p>
+                            <span class="project-btn">
+                                Төслийг үзэх
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="project-tag">Зураг авалт</span>
+                </div>
+                
+                <!-- Additional Interior -->
+                <div class="project-card" data-category="interior">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&h=600&fit=crop" alt="Interior">
+                        <div class="project-overlay">
+                            <span class="project-category">Интерьер</span>
+                            <h3 class="project-title">Оффис интерьер</h3>
+                            <p class="project-desc">Орчин үеийн оффисын интерьер дизайн</p>
+                            <span class="project-btn">
+                                Төслийг үзэх
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="project-tag">Интерьер</span>
+                </div>
+                
+                <!-- Additional Mockup -->
+                <div class="project-card" data-category="mockup">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?w=800&h=600&fit=crop" alt="Mockup">
+                        <div class="project-overlay">
+                            <span class="project-category">Mockup</span>
+                            <h3 class="project-title">Визит карт</h3>
+                            <p class="project-desc">Минималист визит карт дизайн</p>
+                            <span class="project-btn">
+                                Төслийг үзэх
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="project-tag">Mockup</span>
+                </div>
+                
+                <!-- Additional Poster -->
+                <div class="project-card" data-category="poster">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=800&h=600&fit=crop" alt="Poster">
+                        <div class="project-overlay">
+                            <span class="project-category">Poster</span>
+                            <h3 class="project-title">Event постер</h3>
+                            <p class="project-desc">Тоглолтын постер дизайн</p>
+                            <span class="project-btn">
+                                Төслийг үзэх
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="project-tag">Poster</span>
+                </div>
+            </div>
+            
+            <div class="projects-footer reveal">
+                <a href="#" class="btn btn-outline">
+                    Бүх ажлуудыг үзэх
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-bg"></div>
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-form-wrapper">
+                    <p class="section-label reveal">Холбогдох</p>
+                    <h2 class="section-title reveal">Хамтдаа гайхамшигтай зүйл бүтээе</h2>
+                    <p class="about-text reveal">Танд төсөл байна уу? Сонсохыг хүсэж байна.</p>
+                    
+                    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label class="form-label">Нэр</label>
+                            <input type="text" class="form-input" placeholder="Таны нэр" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Имэйл</label>
+                            <input type="email" class="form-input" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Мессеж</label>
+                            <textarea class="form-textarea" placeholder="Таны мессеж..." required></textarea>
+                        </div>
+                        <button type="submit" class="form-submit">
+                            Мессеж илгээх
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="info-item reveal">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="info-label">Имэйл</p>
+                            <p class="info-value">hello@portfolio.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item reveal">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="info-label">Утас</p>
+                            <p class="info-value">+976 9911 2233</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-item reveal">
+                        <div class="info-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="info-label">Байршил</p>
+                            <p class="info-value">Улаанбаатар, Монгол</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-social reveal">
+                        <p class="contact-social-title">Сошиал хаягууд</p>
+                        <div class="contact-social-links">
+                            <a href="#" class="contact-social-link" aria-label="Dribbble">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path>
+                                </svg>
+                            </a>
+                            <a href="#" class="contact-social-link" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg>
+                            </a>
+                            <a href="#" class="contact-social-link" aria-label="LinkedIn">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                    <rect x="2" y="9" width="4" height="12"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <a href="#" class="footer-logo">Portfolio</a>
+                <nav class="footer-nav">
+                    <a href="#home">Нүүр</a>
+                    <a href="#about">Тухай</a>
+                    <a href="#projects">Ажлууд</a>
+                    <a href="#contact">Холбогдох</a>
+                </nav>
+                <p class="footer-copy">© 2024 Portfolio. Бүх эрх хуулиар хамгаалагдсан.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Project filtering
+        function filterProjects(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.project-card');
+            
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === getCategoryLabel(category)) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    }, 50);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.9)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+
+        function getCategoryLabel(category) {
+            const labels = {
+                'all': 'Бүгд',
+                'interior': 'Интерьер',
+                'mockup': 'Mockup',
+                'poster': 'Poster',
+                'menu': 'Мэню',
+                'photo': 'Зураг авалт'
+            };
+            return labels[category] || 'Бүгд';
+        }
+
+        // Form submission
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Мессеж илгээгдлээ! Баярлалаа.');
+            e.target.reset();
+        }
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
